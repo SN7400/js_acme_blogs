@@ -9,3 +9,18 @@ function createElemWithText (htmlElement = "p", textContent = "", className) {
     }
     return element;
 }
+
+function createSelectOptions (users) {
+    if (users === undefined) {
+        return undefined
+    } else {
+        const optionsArray = [];
+        for (user of users) {
+            let option = document.createElement("option");
+            option.value = user.id;
+            option.textContent = user.name;
+            optionsArray.push(option);
+        }
+        return optionsArray;
+    }
+}
