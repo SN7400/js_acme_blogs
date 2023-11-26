@@ -54,3 +54,16 @@ function toggleCommentButton(postId) {
         return button;
     }
 }
+
+function deleteChildElements(parentElement) {
+    if (!parentElement || typeof parentElement !== "object" || !parentElement.toString().includes("HTML")) {
+        return undefined;
+    } else {
+        child = parentElement.lastElementChild;
+        while (child) {
+            parentElement.removeChild(child);
+            child = parentElement.lastElementChild;
+        }
+        return parentElement;
+    }
+}
