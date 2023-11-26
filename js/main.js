@@ -35,3 +35,22 @@ function toggleCommentSection(postId) {
         return section;
     }
 }
+
+function toggleCommentButton(postId) {
+    if (!postId) {
+        return undefined;
+    } else {
+        const button = document.querySelector(`button[data-post-id="${postId}"]`);
+        if (button) {
+            switch (button.textContent) {
+                case "Show Comments":
+                    button.textContent = "Hide Comments";
+                    break;
+                case "Hide Comments":
+                    button.textContent = "Show Comments";
+                    break;
+            }
+        }
+        return button;
+    }
+}
