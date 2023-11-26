@@ -1,17 +1,16 @@
 // Shenandoah Bennett Final Project INF 651 VC Fall 2023
 
-function createElemWithText (htmlElement = "p", textContent = "", className) {
+function createElemWithText(htmlElement = "p", textContent = "", className) {
     const element = document.createElement(htmlElement);
-    const content = document.createTextNode(textContent);
-    element.appendChild(content);
-    if (className !== undefined) {
+    element.textContent = textContent;
+    if (className) {
         element.classList.add(className);
     }
     return element;
 }
 
-function createSelectOptions (users) {
-    if (users === undefined) {
+function createSelectOptions(users) {
+    if (!users) {
         return undefined
     } else {
         const optionsArray = [];
@@ -22,5 +21,17 @@ function createSelectOptions (users) {
             optionsArray.push(option);
         }
         return optionsArray;
+    }
+}
+
+function toggleCommentSection(postId) {
+    if (!postId) {
+        return undefined;
+    } else {
+        const section = document.querySelector(`section[data-post-id="${postId}"]`);
+        if (section) {
+            section.classList.toggle("hide");
+        }
+        return section;
     }
 }
