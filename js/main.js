@@ -95,3 +95,21 @@ function removeButtonListeners() {
     }
     return buttons;
 }
+
+function createComments(commentsData) {
+    if (!commentsData) {
+        return undefined;
+    } else {
+        const fragment = document.createDocumentFragment();
+        for (let comment of commentsData) {
+            const article = document.createElement("article");
+            const h3 = createElemWithText("h3", comment.name);
+            const body = createElemWithText("p", comment.body);
+            const from = createElemWithText("p", `From: ${comment.email}`);
+            article.append(h3, body, from);
+            fragment.append(article);
+        }
+        return fragment;
+    }
+
+}
