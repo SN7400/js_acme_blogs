@@ -67,3 +67,31 @@ function deleteChildElements(parentElement) {
         return parentElement;
     }
 }
+
+function toggleComments() {
+
+}
+
+function addButtonListeners() {
+    const buttons = document.querySelectorAll("main button");
+    if (buttons) {
+        for (let button of buttons) {
+            if (button.dataset.postId) {
+                button.addEventListener("click", (e) => toggleComments(e, button.dataset.postId));
+            }
+        }
+    }
+    return buttons;
+}
+
+function removeButtonListeners() {
+    const buttons = document.querySelectorAll("main button");
+    if (buttons) {
+        for (let button of buttons) {
+            if (button.dataset.postId) {
+                button.removeEventListener("click", toggleComments);
+            }
+        }
+    }
+    return buttons;
+}
