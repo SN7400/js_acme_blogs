@@ -111,5 +111,17 @@ function createComments(commentsData) {
         }
         return fragment;
     }
+}
 
+function populateSelectMenu(usersData) {
+    if (!usersData) {
+        return undefined;
+    } else {
+        const selectMenu = document.getElementById("selectMenu");
+        const options = createSelectOptions(usersData);
+        for (let option of options) {
+            selectMenu.append(option);
+        }
+        return selectMenu;
+    }
 }
