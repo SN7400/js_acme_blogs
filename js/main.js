@@ -129,9 +129,24 @@ function populateSelectMenu(usersData) {
 async function getUsers() {
     try {
         const users = await fetch("https://jsonplaceholder.typicode.com/users");
-        if (!users.ok) throw new Error("Status code not in 200-299 range");
+        if (!users.ok) throw new Error("Status code not in the 200-299 range.");
         return await users.json();
     } catch (error) {
-        console.error(error)
+        console.error(error);
     }
+}
+
+async function getUserPosts(userId) {
+    if (!userId) {
+        return undefined;
+    } else {
+        try {
+            const posts = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}/posts`);
+            if (!posts.ok) throw new Error("Status code not in the 200-299 range.");
+            return await posts.json();
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
 }
