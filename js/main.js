@@ -177,3 +177,18 @@ async function getPostComments(postId) {
         }
     }
 }
+
+async function displayComments(postId) {
+    if (!postId) {
+        return undefined;
+    } else {
+        const section = document.createElement("section");
+        section.dataset.postId = postId;
+        section.classList.add("comments", "hide");
+        const comments = await getPostComments(postId);
+        const fragment = createComments(comments);
+        section.append(fragment);
+        return section;
+    }
+}
+
