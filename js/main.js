@@ -129,7 +129,7 @@ function populateSelectMenu(usersData) {
 async function getUsers() {
     try {
         const users = await fetch("https://jsonplaceholder.typicode.com/users");
-        if (!users.ok) throw new Error("Status code not in the 200-299 range.");
+        if (!users.ok) throw new Error("Fetching list of users was unsuccessful.");
         return await users.json();
     } catch (error) {
         console.error(error);
@@ -142,11 +142,38 @@ async function getUserPosts(userId) {
     } else {
         try {
             const posts = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}/posts`);
-            if (!posts.ok) throw new Error("Status code not in the 200-299 range.");
+            if (!posts.ok) throw new Error("Fetching user's posts was unsuccessful.");
             return await posts.json();
         } catch (error) {
             console.error(error);
         }
     }
+}
 
+async function getUser(userId) {
+    if (!userId) {
+        return undefined;
+    } else {
+        try {
+            const user = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}`);
+            if (!user.ok) throw new Error("Fetching user data was unsuccessful.");
+            return await user.json();
+        } catch (error) {
+            console.error(error);
+        }
+    }
+}
+
+async function getPostComments(postId) {
+    if (!postId) {
+        return undefined;
+    } else {
+        try {
+            const comments = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}/comments`);
+            if (!comments.ok) throw new Error("Fetching post's comments was unsuccessful.");
+            return await comments.json();
+        } catch (error) {
+            console.error(error);
+        }
+    }
 }
