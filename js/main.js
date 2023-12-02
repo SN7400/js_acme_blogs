@@ -125,3 +125,13 @@ function populateSelectMenu(usersData) {
         return selectMenu;
     }
 }
+
+async function getUsers() {
+    try {
+        const users = await fetch("https://jsonplaceholder.typicode.com/users");
+        if (!users.ok) throw new Error("Status code not in 200-299 range");
+        return await users.json();
+    } catch (error) {
+        console.error(error)
+    }
+}
