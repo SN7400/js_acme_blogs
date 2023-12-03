@@ -268,3 +268,15 @@ async function selectMenuChangeEventHandler(event) {
         return [userId, posts, refreshPostsArray];
     }
 }
+
+async function initPage() {
+    const users = await getUsers();
+    const select = populateSelectMenu(users);
+    return [users, select];
+}
+
+function initApp() {
+    initPage();
+    const selectMenu = document.getElementById("selectMenu");
+    selectMenu.addEventListener("change", selectMenuChangeEventHandler);
+}
