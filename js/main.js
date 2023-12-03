@@ -192,3 +192,31 @@ async function displayComments(postId) {
     }
 }
 
+async function createPosts(postsData) {
+    if (!postsData) {
+        return undefined;
+    } else {
+        const fragment = document.createDocumentFragment();
+        for (post of postsData) {
+            let article = document.createElement("article");
+            let postTitle = document.createElement("h2");
+            postTitle.textContent = post.title;
+            let postBody = document.createElement("p");
+            postBody.textContent = post.body;
+            let postId = document.createElement("p");
+            postId.textContent = `Post ID: ${post.id}`;
+            let author = await getUser(post.userId);
+            let postAuthor = document.createElement("p");
+            postAuthor.textContent = `Author: ${author.name} with ${author.company.name}`;
+            let postCatchPhrase = document.createElement("p");
+            postCatchPhrase.textContent = author.company.catchPhrase;
+            let postButton = document.createElement("button");
+            postButton.textContent = "Show Comments";
+            postButton.dataset.postId = post.id;
+            let section = await displayComments(post.id);
+            article.append(postTitle, postBody, postId, postAuthor, postCatchPhrase, postButton, section);
+            fragment.append(article);
+        }
+        return fragment;
+    }
+}
