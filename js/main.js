@@ -68,10 +68,6 @@ function deleteChildElements(parentElement) {
     }
 }
 
-function toggleComments() {
-
-}
-
 function addButtonListeners() {
     const buttons = document.querySelectorAll("main button");
     if (buttons) {
@@ -192,12 +188,12 @@ async function displayComments(postId) {
     }
 }
 
-async function createPosts(postsData) {
-    if (!postsData) {
+async function createPosts(posts) {
+    if (!posts) {
         return undefined;
     } else {
         const fragment = document.createDocumentFragment();
-        for (post of postsData) {
+        for (let post of posts) {
             let article = document.createElement("article");
             let postTitle = document.createElement("h2");
             postTitle.textContent = post.title;
@@ -218,5 +214,30 @@ async function createPosts(postsData) {
             fragment.append(article);
         }
         return fragment;
+    }
+}
+
+async function displayPosts(posts) {
+    const mainElement = document.querySelector("main");
+    let element;
+    if (posts) {
+        element = await createPosts(posts);
+    } else {
+        element = document.createElement("p");
+        element.textContent = "Select an Employee to display their posts.";
+        element.classList.add("default-text");
+    }
+    mainElement.append(element);
+    return element;
+}
+
+function toggleComments(event, postId) {
+    if (!event || !postId) {
+        return undefined;
+    } else {
+        event.target.listener = true;
+        const section = toggleCommentSection(postId);
+        const button = toggleCommentButton(postId);
+        return [section, button];
     }
 }
