@@ -254,3 +254,17 @@ async function refreshPosts(posts) {
         return [removeButtons, main, fragment, addButtons];
     }
 }
+
+async function selectMenuChangeEventHandler(event) {
+    if (!event || event.type !== "change") {
+        return undefined;
+    } else {
+        const selectMenu = document.getElementById("selectMenu");
+        selectMenu.disabled = true;
+        const userId = event?.target?.value || 1;
+        const posts = await getUserPosts(userId);
+        const refreshPostsArray = await refreshPosts(posts);
+        selectMenu.disabled = false;
+        return [userId, posts, refreshPostsArray];
+    }
+}
