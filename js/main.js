@@ -194,22 +194,16 @@ async function createPosts(posts) {
     } else {
         const fragment = document.createDocumentFragment();
         for (let post of posts) {
-            let article = document.createElement("article");
-            let postTitle = document.createElement("h2");
-            postTitle.textContent = post.title;
-            let postBody = document.createElement("p");
-            postBody.textContent = post.body;
-            let postId = document.createElement("p");
-            postId.textContent = `Post ID: ${post.id}`;
-            let author = await getUser(post.userId);
-            let postAuthor = document.createElement("p");
-            postAuthor.textContent = `Author: ${author.name} with ${author.company.name}`;
-            let postCatchPhrase = document.createElement("p");
-            postCatchPhrase.textContent = author.company.catchPhrase;
-            let postButton = document.createElement("button");
-            postButton.textContent = "Show Comments";
+            const article = document.createElement("article");
+            const postTitle = createElemWithText("h2", post.title);
+            const postBody = createElemWithText("p", post.body);
+            const postId = createElemWithText("p", `Post ID: ${post.id}`);
+            const author = await getUser(post.userId);
+            const postAuthor = createElemWithText("p", `Author: ${author.name} with ${author.company.name}`);
+            const postCatchPhrase = createElemWithText("p", author.company.catchPhrase);
+            const postButton = createElemWithText("button", "Show Comments");
             postButton.dataset.postId = post.id;
-            let section = await displayComments(post.id);
+            const section = await displayComments(post.id);
             article.append(postTitle, postBody, postId, postAuthor, postCatchPhrase, postButton, section);
             fragment.append(article);
         }
