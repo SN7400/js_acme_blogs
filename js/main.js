@@ -14,7 +14,7 @@ function createSelectOptions(users) {
         return undefined
     } else {
         const optionsArray = [];
-        for (user of users) {
+        for (let user of users) {
             const option = createElemWithText("option", user.name);
             option.value = user.id;
             optionsArray.push(option);
