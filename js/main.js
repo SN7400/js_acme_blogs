@@ -241,3 +241,16 @@ function toggleComments(event, postId) {
         return [section, button];
     }
 }
+
+async function refreshPosts(posts) {
+    if (!posts) {
+        return undefined;
+    } else {
+        const removeButtons = removeButtonListeners();
+        mainElement = document.querySelector("main");
+        const main = deleteChildElements(mainElement);
+        const fragment = await displayPosts(posts);
+        const addButtons = addButtonListeners();
+        return [removeButtons, main, fragment, addButtons];
+    }
+}
