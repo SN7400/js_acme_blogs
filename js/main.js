@@ -15,9 +15,8 @@ function createSelectOptions(users) {
     } else {
         const optionsArray = [];
         for (user of users) {
-            let option = document.createElement("option");
+            const option = createElemWithText("option", user.name);
             option.value = user.id;
-            option.textContent = user.name;
             optionsArray.push(option);
         }
         return optionsArray;
@@ -217,8 +216,7 @@ async function displayPosts(posts) {
     if (posts) {
         element = await createPosts(posts);
     } else {
-        element = document.createElement("p");
-        element.textContent = "Select an Employee to display their posts.";
+        element = createElemWithText("p", "Select an Employee to display their posts.");
         element.classList.add("default-text");
     }
     mainElement.append(element);
